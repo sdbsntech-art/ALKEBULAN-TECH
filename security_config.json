@@ -1,0 +1,259 @@
+{
+  "alkebulan_security": {
+    "version": "1.0.0",
+    "owner": "ALKEBULAN TECH",
+    "created": "2025",
+    "alert_email": "seydoubakhayokho1@gmail.com",
+
+    "integration": {
+      "description": "Comment integrer dans index.html",
+      "etapes": [
+        "1. Copier security.js dans le meme dossier que index.html",
+        "2. Ajouter juste avant </body> : <script src='security.js'></script>",
+        "3. Lancer le serveur Python : python security_server.py",
+        "4. Creer un mot de passe Gmail : myaccount.google.com/apppasswords",
+        "5. Remplacer SMTP_PASS dans security_server.py",
+        "6. Tester : clic droit sur le site -> verifier son + email"
+      ]
+    },
+
+    "frontend_js": {
+      "fichier": "security.js",
+      "protections_actives": {
+        "clic_droit": {
+          "actif": true,
+          "evenement": "contextmenu",
+          "action": "preventDefault + overlay + son + rapport"
+        },
+        "raccourcis_bloques": {
+          "actif": true,
+          "liste": [
+            "Ctrl+U  : voir code source HTML",
+            "Ctrl+S  : sauvegarder la page",
+            "Ctrl+P  : imprimer la page",
+            "Ctrl+A  : selectionner tout",
+            "F12     : ouvrir DevTools",
+            "Ctrl+Shift+I : Inspecteur elements",
+            "Ctrl+Shift+J : Console JavaScript",
+            "Ctrl+Shift+C : Inspect element",
+            "Ctrl+Shift+K : Console Firefox",
+            "Ctrl+F5 : Rechargement hard"
+          ]
+        },
+        "selection_texte": {
+          "actif": true,
+          "exception": "Les champs INPUT et TEXTAREA restent utilisables"
+        },
+        "drag_and_drop": {
+          "actif": true,
+          "description": "Empeche de glisser les images et textes"
+        },
+        "copier_coller": {
+          "actif": true,
+          "description": "Vide le presse-papier si copie tentee"
+        },
+        "impression": {
+          "actif": true,
+          "methode": "CSS @media print : display none"
+        },
+        "detection_devtools": {
+          "actif": true,
+          "methode_1": {
+            "nom": "Difference taille fenetre",
+            "seuil_pixels": 160,
+            "intervalle_ms": 1000,
+            "description": "Si outerWidth - innerWidth > 160px, DevTools est ouvert"
+          },
+          "methode_2": {
+            "nom": "Timing debugger",
+            "intervalle_ms": 4000,
+            "seuil_ms": 100,
+            "description": "La pause debugger prend plus de 100ms si DevTools actif"
+          }
+        },
+        "console_neutralisee": {
+          "actif": true,
+          "methodes_neutralisees": ["log","warn","error","info","debug","table","dir","trace","group","groupEnd"]
+        },
+        "view_source_url": {
+          "actif": true,
+          "description": "Redirige vers about:blank si protocol = view-source:"
+        }
+      },
+      "alertes": {
+        "son": {
+          "actif": true,
+          "api": "Web Audio API (WebAudioContext)",
+          "type_onde": "square",
+          "frequence_debut_hz": 880,
+          "frequence_fin_hz": 220,
+          "duree_ms": 500,
+          "compatibilite": "Tous navigateurs modernes"
+        },
+        "overlay_visuel": {
+          "actif": true,
+          "z_index": 2147483647,
+          "dismissible": true,
+          "affiche_type": true,
+          "couleurs": {
+            "fond": "rgba(8,6,14,0.97)",
+            "titre": "#00BFFF",
+            "texte": "#C8C8E0",
+            "bouton": "#00BFFF"
+          }
+        },
+        "rapport_serveur": {
+          "actif": true,
+          "methodes_envoi": [
+            "fetch POST /api/security-alert (JSON)",
+            "navigator.sendBeacon /api/security-alert (fiable en fermeture)",
+            "Image beacon /api/ping?t={type} (fallback universel)"
+          ]
+        }
+      }
+    },
+
+    "backend_python": {
+      "fichier": "security_server.py",
+      "langage": "Python 3",
+      "framework": "Flask",
+      "port": 5001,
+      "dependances": [
+        "flask       : pip install flask",
+        "flask-cors  : pip install flask-cors",
+        "playsound   : pip install playsound (optionnel, pour .wav)"
+      ],
+      "base_donnees": {
+        "moteur": "SQLite",
+        "fichier": "security_alerts.db",
+        "table": "alerts",
+        "colonnes": {
+          "id":         "INTEGER PRIMARY KEY AUTOINCREMENT",
+          "type":       "TEXT - type de tentative",
+          "url":        "TEXT - page concernee",
+          "ip":         "TEXT - adresse IP du visiteur",
+          "user_agent": "TEXT - navigateur utilise",
+          "timestamp":  "TEXT - horodatage ISO 8601 UTC"
+        },
+        "retention": "Illimitee (toutes alertes conservees)"
+      },
+      "email": {
+        "actif": true,
+        "destinataire": "seydoubakhayokho1@gmail.com",
+        "expediteur": "seydoubakhayokho1@gmail.com",
+        "smtp_host": "smtp.gmail.com",
+        "smtp_port": 587,
+        "chiffrement": "STARTTLS",
+        "format": "HTML + texte brut (multipart/alternative)",
+        "cooldown_secondes": 30,
+        "note_importante": "Utiliser un MOT DE PASSE D'APPLICATION Gmail, pas votre vrai mot de passe",
+        "url_creation_mdp_app": "https://myaccount.google.com/apppasswords"
+      },
+      "son_serveur": {
+        "actif": true,
+        "fallback_chain": [
+          "1. playsound (alert.wav si fichier present)",
+          "2. winsound.Beep (Windows uniquement)",
+          "3. printf \\a (terminal bell Linux/Mac)"
+        ]
+      },
+      "endpoints": {
+        "POST /api/security-alert": {
+          "description": "Reception alerte JSON depuis le JS frontend",
+          "body_attendu": {
+            "type": "string - type de tentative",
+            "url": "string - URL de la page",
+            "timestamp": "string - ISO 8601",
+            "userAgent": "string - navigateur"
+          },
+          "actions": ["save_db", "play_sound", "send_email"]
+        },
+        "GET /api/ping": {
+          "description": "Beacon image fallback",
+          "params": "?t={type}&ts={timestamp}",
+          "retour": "image/gif pixel transparent 1x1"
+        },
+        "GET /api/alerts": {
+          "description": "Journal complet des incidents",
+          "auth": "?token=alkebulan_admin_2025",
+          "limite": "200 derniers incidents",
+          "format_retour": "JSON array"
+        },
+        "GET /api/stats": {
+          "description": "Statistiques par type et par IP",
+          "auth": "?token=alkebulan_admin_2025",
+          "format_retour": "JSON avec total, by_type, top_ips"
+        }
+      }
+    },
+
+    "http_headers_securite": {
+      "description": "Ajouter ces headers dans votre serveur web (nginx/apache)",
+      "headers": {
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'",
+        "Permissions-Policy": "geolocation=(), camera=(), microphone=(), payment=()"
+      }
+    },
+
+    "nginx_config": {
+      "description": "Coller dans le bloc server{} de /etc/nginx/sites-available/alkebulan",
+      "config": [
+        "# Headers de securite",
+        "add_header X-Frame-Options DENY always;",
+        "add_header X-Content-Type-Options nosniff always;",
+        "add_header X-XSS-Protection '1; mode=block' always;",
+        "add_header Referrer-Policy no-referrer always;",
+        "add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains' always;",
+        "",
+        "# Masquer version nginx",
+        "server_tokens off;",
+        "",
+        "# Bloquer acces aux fichiers sensibles",
+        "location ~ /\\. { deny all; return 404; }",
+        "location ~* \\.(py|sh|env|sql|log|git|json|bak|config)$ { deny all; return 404; }",
+        "",
+        "# Proxy vers le serveur de securite Python",
+        "location /api/ {",
+        "  proxy_pass http://127.0.0.1:5001;",
+        "  proxy_set_header X-Forwarded-For $remote_addr;",
+        "  proxy_set_header Host $host;",
+        "}"
+      ]
+    },
+
+    "types_alertes_surveilles": {
+      "clic_droit":     "Clic droit sur la page",
+      "Ctrl+U":         "Tentative d'affichage du code source",
+      "Ctrl+S":         "Tentative de sauvegarde de la page",
+      "Ctrl+P":         "Tentative d'impression",
+      "Ctrl+A":         "Tentative de tout selectionner",
+      "F12":            "Ouverture des outils developpeur F12",
+      "DevTools_I":     "Ctrl+Shift+I (Inspecteur)",
+      "DevTools_J":     "Ctrl+Shift+J (Console JavaScript)",
+      "DevTools_C":     "Ctrl+Shift+C (Inspection element)",
+      "DevTools_K":     "Ctrl+Shift+K (Console Firefox)",
+      "Ctrl+F5":        "Rechargement force",
+      "devtools_ouvert":"DevTools detecte ouvert (difference taille fenetre)",
+      "debugger_actif": "Debugger JS detecte actif (timing)",
+      "ping":           "Beacon image de secours recu"
+    },
+
+    "checklist_deploiement": [
+      "[ ] Ajouter <script src='security.js'></script> avant </body> dans index.html",
+      "[ ] pip install flask flask-cors (+ playsound si besoin de son .wav)",
+      "[ ] Creer mot de passe application Gmail sur myaccount.google.com/apppasswords",
+      "[ ] Remplacer SMTP_PASS dans security_server.py avec ce mot de passe",
+      "[ ] Lancer : python security_server.py",
+      "[ ] Configurer nginx avec le snippet fourni (proxy /api/ vers port 5001)",
+      "[ ] Appliquer les HTTP headers de securite",
+      "[ ] Tester clic droit : verifier son + overlay + email recu",
+      "[ ] Tester F12 : verifier overlay + email",
+      "[ ] Consulter journal : /api/alerts?token=alkebulan_admin_2025"
+    ]
+  }
+}
