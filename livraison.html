@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraison · ALKEBULAN TECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo/alkebulan tech.jpeg" type="image/jpeg">
+    <style>
+        /* ===== REPRISE DU STYLE GLOBAL (identique à faq.html) ===== */
+        :root {
+            --primary: #00BFFF;
+            --primary-light: #5DD9FF;
+            --primary-dark: #0099CC;
+            --accent: #E91E8C;
+            --bg-dark: #0D0A1A;
+            --black: #08060E;
+            --dark: #12101E;
+            --dark-2: #1A1528;
+            --dark-3: #242038;
+            --white: #F5F3FF;
+            --grey: #8A8AA3;
+            --grey-light: #C8C8E0;
+            --gold: var(--primary);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; cursor: none; }
+        .cursor { position: fixed; width: 12px; height: 12px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s; }
+        .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.15s ease, opacity 0.3s; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 60px; background: linear-gradient(180deg, rgba(13,10,26,0.98) 0%, rgba(13,10,26,0) 100%); transition: all 0.4s; }
+        nav.scrolled { background: rgba(13,10,26,0.96); backdrop-filter: blur(20px); padding: 14px 60px; border-bottom: 1px solid rgba(0,191,255,0.25); }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 44px; width: auto; object-fit: contain; }
+        .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--white); letter-spacing: 3px; text-transform: uppercase; }
+        .nav-logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { color: var(--grey-light); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; gap: 24px; }
+        .nav-cart { position: relative; cursor: none; color: var(--white); transition: color 0.3s; }
+        .nav-cart:hover { color: var(--gold); }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--gold); color: var(--black); font-size: 9px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .btn-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn-nav:hover { background: var(--gold); color: var(--black); }
+
+        /* ===== STYLES SPÉCIFIQUES LIVRAISON ===== */
+        .page-header {
+            margin-top: 120px;
+            padding: 60px 60px 20px;
+            text-align: center;
+        }
+        .page-header .section-tag {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 700;
+            color: var(--white);
+        }
+        .page-header h1 .gold {
+            color: var(--gold);
+        }
+        .delivery-section {
+            padding: 40px 60px 100px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .delivery-card {
+            background: var(--dark-2);
+            border: 1px solid rgba(0, 191, 255, 0.25);
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .delivery-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+        .delivery-icon {
+            font-size: 48px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        .delivery-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        .delivery-card h2 .gold {
+            color: var(--gold);
+        }
+        .delivery-highlight {
+            background: rgba(0, 191, 255, 0.08);
+            border-left: 4px solid var(--gold);
+            padding: 20px 24px;
+            margin: 25px 0;
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--grey-light);
+        }
+        .delivery-highlight strong {
+            color: var(--gold);
+            font-size: 28px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .delivery-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+        .delivery-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--grey-light);
+        }
+        .delivery-list li::before {
+            content: '➤';
+            color: var(--gold);
+            font-size: 14px;
+        }
+        .delivery-note {
+            background: var(--dark-3);
+            padding: 24px;
+            border-radius: 0;
+            margin-top: 30px;
+            font-style: italic;
+            border: 1px dashed var(--gold);
+        }
+        .delivery-note p {
+            color: var(--grey-light);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .delivery-note strong {
+            color: var(--gold);
+            font-style: normal;
+        }
+        .gold-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 60px; opacity: 0.3; }
+        .whatsapp-btn-delivery {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: transform 0.3s, background 0.3s;
+            border: none;
+            margin-top: 15px;
+        }
+        .whatsapp-btn-delivery:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        footer { background: var(--dark-2); border-top: 1px solid rgba(0,191,255,0.2); padding: 80px 60px 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand .nav-logo { margin-bottom: 20px; }
+        .footer-brand-desc { font-size: 14px; color: var(--grey); line-height: 1.7; margin-bottom: 28px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .social-btn { width: 40px; height: 40px; border: 1px solid rgba(0,191,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--grey); text-decoration: none; transition: all 0.3s; cursor: none; }
+        .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: var(--grey); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--white); }
+        .footer-bottom { border-top: 1px solid rgba(0,191,255,0.15); padding-top: 32px; display: flex; align-items: center; justify-content: space-between; }
+        .footer-copy { font-size: 12px; color: var(--grey); letter-spacing: 1px; }
+        .footer-copy span { color: var(--gold); }
+        .footer-pay { display: flex; gap: 8px; align-items: center; }
+        .pay-badge { background: var(--dark-3); border: 1px solid rgba(0,191,255,0.2); padding: 4px 10px; font-size: 11px; color: var(--grey); letter-spacing: 1px; }
+
+        @media (max-width: 1100px) {
+            nav, nav.scrolled, .page-header, .delivery-section { padding-left: 30px; padding-right: 30px; }
+            .gold-divider { margin: 0 30px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .delivery-card { padding: 25px; }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="logo/alkebulan tech.jpeg" alt="ALKEBULAN TECH" onerror="this.style.display='none'">
+            <span class="nav-logo-text">ALKEBULAN <span>TECH</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#categories">Catégories</a></li>
+            <li><a href="index.html#produits">Produits</a></li>
+            <li><a href="index.html#galerie">Galerie</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#commande">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-cart">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span class="cart-count">0</span>
+            </div>
+            <a href="index.html#commande" class="btn-nav">Commander</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="section-tag">Livraison & Transport</div>
+        <h1>Politique de <span class="gold">Livraison</span></h1>
+    </div>
+
+    <div class="gold-divider"></div>
+
+    <section class="delivery-section">
+        <!-- CARD PRINCIPALE : TARIF DAKAR -->
+        <div class="delivery-card reveal">
+            <div class="delivery-icon">🚚</div>
+            <h2>Tarif <span class="gold">Dakar</span></h2>
+            <div class="delivery-highlight">
+                <strong>2000 FCFA</strong> (prix déjà réduit)
+            </div>
+            <p style="color: var(--grey-light); font-size: 16px; line-height: 1.7;">
+                Pour toute livraison dans le <strong>territoire de Dakar</strong>, les frais sont fixes et s'élèvent à 2000 FCFA. <span style="color: var(--gold);">Aucune négociation possible</span> — nous proposons déjà des prix extrêmement compétitifs.
+            </p>
+            <ul class="delivery-list">
+                <li>Livraison rapide (24h à 48h ouvrées)</li>
+                <li>Suivi de commande par téléphone / WhatsApp</li>
+                <li>Paiement à la livraison possible</li>
+            </ul>
+        </div>
+
+        <!-- CARD HORS DAKAR -->
+        <div class="delivery-card reveal">
+            <div class="delivery-icon">🌍</div>
+            <h2>Hors <span class="gold">Dakar</span></h2>
+            <p style="color: var(--grey-light); font-size: 16px; margin-bottom: 20px;">
+                Vous êtes en dehors de la capitale ? Pas de souci, nous livrons également dans plusieurs localités. Pour cela, nous avons besoin de votre <strong>localisation exacte</strong> (ville, quartier) afin de déterminer le mode d'acheminement et le coût final.
+            </p>
+            <div style="background: rgba(233,30,140,0.05); border-left: 4px solid var(--accent); padding: 16px 20px; margin-bottom: 25px;">
+                <p style="color: var(--grey-light); margin: 0;"><span style="color: var(--accent); font-weight: 600;">Important :</span> Veuillez préciser votre lieu exact lors de votre commande (ex: "Thiès, quartier Escale" ou "Saint-Louis, Sor"). Nous vous indiquerons ensuite les modalités via <strong>GP, bus, coursier partenaire</strong> ou tout autre service disponible.</p>
+            </div>
+            <a href="https://wa.me/221785577229?text=Bonjour%20ALKEBULAN%20TECH%2C%20je%20souhaite%20connaître%20les%20frais%20de%20livraison%20pour%20ma%20localit%C3%A9%20(%C3%A0%20pr%C3%A9ciser)" target="_blank" class="whatsapp-btn-delivery">📱 Demander le tarif pour ma ville</a>
+        </div>
+
+        <!-- CARD INFORMATIONS COMPLÉMENTAIRES -->
+        <div class="delivery-card reveal">
+            <div class="delivery-icon">📦</div>
+            <h2>Modes <span class="gold">d'acheminement</span></h2>
+            <p style="color: var(--grey-light); margin-bottom: 15px;">
+                Selon votre localité, nous utilisons différents partenaires fiables pour garantir la réception de votre colis :
+            </p>
+            <ul class="delivery-list">
+                <li><strong>Transport GP (Gare routière)</strong> — pour les villes principales (Thiès, Mbour, Kaolack, Saint-Louis, etc.)</li>
+                <li><strong>Bus / Cars rapides</strong> — pour certaines destinations</li>
+                <li><strong>Service de coursier privé</strong> — pour les zones spécifiques</li>
+                <li><strong>Remise en main propre</strong> — possible à Dakar sur rendez-vous</li>
+            </ul>
+        </div>
+
+        <div class="delivery-note reveal">
+            <p>
+                <strong>➔ Résumé :</strong> <span style="color: var(--gold);">Dakar → 2000 FCFA (fixe)</span> · Hors Dakar → <strong>veuillez préciser votre localité</strong> (ville, quartier) lors de la commande afin que nous vous communiquions le délai et le tarif exact via GP ou autre. Nos prix sont définitifs et non négociables.
+            </p>
+            <p style="margin-top: 16px; font-style: normal;">
+                Pour toute question relative à la livraison, contactez-nous directement sur WhatsApp.
+            </p>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo"><img src="logo/alkebulan tech.jpeg" alt="Logo" style="height:36px;" onerror="this.style.display='none'"><span class="nav-logo-text" style="font-size:18px;">ALKEBULAN <span>TECH</span></span></a>
+                <p class="footer-brand-desc">La plateforme de référence pour les produits tech premium en Afrique. Excellence, authenticité et service d'élite.</p>
+                <div class="footer-socials"><a href="https://www.instagram.com/alkebulan_tech/" class="social-btn" title="Instagram">ig</a></div>
+            </div>
+            <div class="footer-col"><h4>Boutique</h4><ul class="footer-links"><li><a href="index.html#produits">Ordinateurs</a></li><li><a href="index.html#produits">Téléphones</a></li><li><a href="index.html#galerie">Galerie</a></li></ul></div>
+            <div class="footer-col"><h4>Infos</h4><ul class="footer-links"><li><a href="livraison.html">Livraison</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#retours">Retours</a></li></ul></div>
+            <div class="footer-col"><h4>Contact</h4><ul class="footer-links"><li><a href="https://wa.me/221785577229">+221 785 57 72 29</a></li><li><a href="https://wa.me/221773624539">+221 773 62 45 39</a></li><li>Dakar, Sénégal</li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 <span>ALKEBULAN TECH</span> · Tous droits réservés</div>
+            <div class="footer-pay"><span class="pay-badge">WAVE</span><span class="pay-badge">OM</span><span class="pay-badge">VISA</span></div>
+        </div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top  = e.clientY + 'px';
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top  = e.clientY + 'px';
+            }, 80);
+        });
+        document.querySelectorAll('a, button, .delivery-card').forEach(el => {
+            el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; cursorRing.style.opacity = '0'; });
+            el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.opacity = '1'; });
+        });
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Panier basique (cohérence)
+        let cartCount = 0;
+        document.querySelector('.nav-cart').addEventListener('click', function() {
+            cartCount++;
+            document.querySelector('.cart-count').textContent = cartCount;
+        });
+    </script>
+</body>
+</html>

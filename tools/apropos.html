@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos · ALKEBULAN TECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../logo/alkebulan%20tech.jpeg" type="image/jpeg">
+    <style>
+        /* ===== REPRISE INTÉGRALE DU STYLE PRINCIPAL ===== */
+        :root {
+            --primary: #00BFFF;
+            --primary-light: #5DD9FF;
+            --primary-dark: #0099CC;
+            --accent: #E91E8C;
+            --accent-light: #FF4D9E;
+            --accent-dark: #C2185B;
+            --bg-dark: #0D0A1A;
+            --black: #08060E;
+            --dark: #12101E;
+            --dark-2: #1A1528;
+            --dark-3: #242038;
+            --white: #F5F3FF;
+            --grey: #8A8AA3;
+            --grey-light: #C8C8E0;
+            --gold: var(--primary);
+            --gold-light: var(--primary-light);
+            --gold-dark: var(--primary-dark);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; cursor: none; }
+        .cursor { position: fixed; width: 12px; height: 12px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s; }
+        .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.15s ease, opacity 0.3s; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 60px; background: linear-gradient(180deg, rgba(13,10,26,0.98) 0%, rgba(13,10,26,0) 100%); transition: all 0.4s; }
+        nav.scrolled { background: rgba(13,10,26,0.96); backdrop-filter: blur(20px); padding: 14px 60px; border-bottom: 1px solid rgba(0,191,255,0.25); }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 44px; width: auto; object-fit: contain; }
+        .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--white); letter-spacing: 3px; text-transform: uppercase; }
+        .nav-logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { color: var(--grey-light); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; gap: 24px; }
+        .nav-cart { position: relative; cursor: none; color: var(--white); transition: color 0.3s; }
+        .nav-cart:hover { color: var(--gold); }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--gold); color: var(--black); font-size: 9px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .btn-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn-nav:hover { background: var(--gold); color: var(--black); }
+
+        /* ===== STYLES SPÉCIFIQUES À PROPOS ===== */
+        .page-header {
+            margin-top: 120px;
+            padding: 60px 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 30%, rgba(0,191,255,0.08) 0%, transparent 60%), 
+                        radial-gradient(ellipse at 30% 70%, rgba(233,30,140,0.06) 0%, transparent 50%);
+            z-index: -1;
+        }
+        .page-header .section-tag {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 6vw, 80px);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .page-header h1 .gold {
+            color: var(--gold);
+        }
+        .page-header .subhead {
+            font-size: 18px;
+            color: var(--grey-light);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .gold-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 60px; opacity: 0.3; }
+
+        /* Section Histoire */
+        .story-section {
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .story-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        .story-content h2 .gold {
+            color: var(--gold);
+        }
+        .story-content p {
+            color: var(--grey-light);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .story-content .lead {
+            font-size: 18px;
+            color: var(--white);
+            font-weight: 400;
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        .story-visual {
+            position: relative;
+            height: 400px;
+            background: var(--dark-2);
+            border: 1px solid rgba(0,191,255,0.2);
+            overflow: hidden;
+        }
+        .story-visual-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 180px;
+            opacity: 0.15;
+            color: var(--gold);
+        }
+        .story-visual-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0,191,255,0.04) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0,191,255,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Section Valeurs */
+        .values-section {
+            padding: 80px 60px;
+            background: var(--dark-2);
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header .section-tag {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+        }
+        .section-header h2 .gold {
+            color: var(--gold);
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .value-card {
+            background: var(--dark-3);
+            border: 1px solid rgba(0,191,255,0.15);
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+        .value-icon {
+            font-size: 56px;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+        .value-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        .value-card p {
+            color: var(--grey-light);
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Section Équipe */
+        .team-section {
+            padding: 80px 60px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .team-card {
+            background: var(--dark-2);
+            border: 1px solid rgba(0,191,255,0.15);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .team-card:hover {
+            border-color: var(--gold);
+        }
+        .team-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--black);
+            border: 3px solid var(--gold);
+        }
+        .team-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .team-role {
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .team-bio {
+            color: var(--grey);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .team-social {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .team-social a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(0,191,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--grey);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        .team-social a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Section Chiffres */
+        .numbers-section {
+            padding: 60px 60px 80px;
+            background: linear-gradient(135deg, var(--dark) 0%, rgba(0,191,255,0.05) 100%);
+        }
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .number-item {
+            padding: 30px;
+        }
+        .number-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .number-label {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grey);
+        }
+
+        /* Section Engagement */
+        .commitment-section {
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .commitment-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        .commitment-content h2 .gold {
+            color: var(--gold);
+        }
+        .commitment-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+        .commitment-list li {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--grey-light);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .commitment-list li i {
+            color: var(--gold);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .commitment-visual {
+            background: var(--dark-2);
+            height: 400px;
+            position: relative;
+            border: 1px solid rgba(0,191,255,0.2);
+            overflow: hidden;
+        }
+        .commitment-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        .commitment-visual-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,191,255,0.2), rgba(233,30,140,0.2));
+        }
+
+        /* Footer */
+        footer { background: var(--dark-2); border-top: 1px solid rgba(0,191,255,0.2); padding: 80px 60px 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand .nav-logo { margin-bottom: 20px; }
+        .footer-brand-desc { font-size: 14px; color: var(--grey); line-height: 1.7; margin-bottom: 28px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .social-btn { width: 40px; height: 40px; border: 1px solid rgba(0,191,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--grey); text-decoration: none; transition: all 0.3s; cursor: none; }
+        .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: var(--grey); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--white); }
+        .footer-bottom { border-top: 1px solid rgba(0,191,255,0.15); padding-top: 32px; display: flex; align-items: center; justify-content: space-between; }
+        .footer-copy { font-size: 12px; color: var(--grey); letter-spacing: 1px; }
+        .footer-copy span { color: var(--gold); }
+        .footer-pay { display: flex; gap: 8px; align-items: center; }
+        .pay-badge { background: var(--dark-3); border: 1px solid rgba(0,191,255,0.2); padding: 4px 10px; font-size: 11px; color: var(--grey); letter-spacing: 1px; }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 1100px) {
+            nav, nav.scrolled, .page-header, .story-section, .values-section, 
+            .team-section, .numbers-section, .commitment-section {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            .gold-divider { margin: 0 30px; }
+            .story-section, .commitment-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .story-visual { order: -1; }
+            .values-grid, .team-grid, .numbers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            footer { padding: 60px 30px 30px; }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .values-grid, .team-grid, .numbers-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; }
+            .page-header h1 { font-size: 42px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="../logo/alkebulan%20tech.jpeg" alt="ALKEBULAN TECH" onerror="this.style.display='none'">
+            <span class="nav-logo-text">ALKEBULAN <span>TECH</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#categories">Catégories</a></li>
+            <li><a href="index.html#produits">Produits</a></li>
+            <li><a href="index.html#galerie">Galerie</a></li>
+            <li><a href="index.html#avis">Avis</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#commande">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-cart">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span class="cart-count">0</span>
+            </div>
+            <a href="index.html#commande" class="btn-nav">Commander</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div class="page-header-bg"></div>
+        <div class="section-tag">Qui sommes-nous ?</div>
+        <h1>À propos d'<span class="gold">ALKEBULAN</span> TECH</h1>
+        <p class="subhead">La technologie d'élite au service de l'Afrique, avec passion et intégrité.</p>
+    </div>
+
+    <div class="gold-divider"></div>
+
+    <!-- SECTION HISTOIRE -->
+    <section class="story-section">
+        <div class="story-content reveal">
+            <h2>Notre <span class="gold">Histoire</span></h2>
+            <p class="lead">"Alkebulan" — un nom qui résonne avec les racines profondes du continent africain.</p>
+            <p>ALKEBULAN TECH est née d'une vision simple : rendre accessible la technologie de pointe en Afrique, sans compromis sur la qualité ni sur l'authenticité. Nous avons commencé avec une poignée de passionnés de tech à Dakar, animés par la conviction que l'Afrique mérite le meilleur de l'innovation mondiale.</p>
+            <p>Aujourd'hui, nous sommes fiers de proposer une sélection rigoureuse d'ordinateurs, smartphones, drones et équipements de surveillance, tous vérifiés et testés pour répondre aux exigences des professionnels et des particuliers les plus avertis.</p>
+        </div>
+        <div class="story-visual reveal">
+            <div class="story-visual-grid"></div>
+            <div class="story-visual-inner">
+                <span>🌍</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION VALEURS -->
+    <section class="values-section">
+        <div class="section-header reveal">
+            <div class="section-tag">Notre ADN</div>
+            <h2>Les valeurs qui nous <span class="gold">animent</span></h2>
+        </div>
+        <div class="values-grid">
+            <div class="value-card reveal">
+                <div class="value-icon">🔮</div>
+                <h3>Excellence</h3>
+                <p>Nous sélectionnons uniquement des produits premium, testés et approuvés, pour garantir une expérience utilisateur irréprochable.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">🤝</div>
+                <h3>Intégrité</h3>
+                <p>Transparence totale sur l'état des produits, prix justes et service honnête. Pas de surprises, que de la confiance.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">⚡</div>
+                <h3>Innovation</h3>
+                <p>Nous traquons les dernières tendances tech pour vous offrir ce qui se fait de mieux, toujours avec une longueur d'avance.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">🌱</div>
+                <h3>Impact local</h3>
+                <p>Nous croyons en une tech qui profite à l'Afrique, en créant des emplois et en formant une communauté d'experts locaux.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">⚙️</div>
+                <h3>Durabilité</h3>
+                <p>Nous privilégions les produits durables et proposons des solutions de reconditionnement de qualité pour réduire l'empreinte écologique.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">❤️</div>
+                <h3>Passion</h3>
+                <p>La tech est notre moteur. Chaque produit est choisi avec amour et chaque client est accompagné avec la même ferveur.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CHIFFRES CLÉS -->
+    <section class="numbers-section">
+        <div class="numbers-grid">
+            <div class="number-item reveal">
+                <div class="number-num">200+</div>
+                <div class="number-label">Produits premium</div>
+            </div>
+            <div class="number-item reveal">
+                <div class="number-num">15+</div>
+                <div class="number-label">Marques partenaires</div>
+            </div>
+            <div class="number-item reveal">
+                <div class="number-num">10k+</div>
+                <div class="number-label">Clients satisfaits</div>
+            </div>
+            <div class="number-item reveal">
+                <div class="number-num">4.9★</div>
+                <div class="number-label">Note moyenne</div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- SECTION ENGAGEMENT -->
+    <section class="commitment-section">
+        <div class="commitment-visual reveal">
+            <img src="../logo/alkebulan%20tech.jpeg" alt="Équipe ALKEBULAN TECH" onerror="this.style.backgroundColor='#1A1528'">
+            <div class="commitment-visual-overlay"></div>
+        </div>
+        <div class="commitment-content reveal">
+            <h2>Notre <span class="gold">Engagement</span></h2>
+            <p style="color: var(--grey-light); font-size: 16px; line-height: 1.7; margin-bottom: 20px;">
+                Chez ALKEBULAN TECH, nous ne vendons pas seulement des produits. Nous construisons une relation de confiance durable avec notre communauté.
+            </p>
+            <ul class="commitment-list">
+                <li><i>✓</i> <strong>Garantie 6 mois minimum</strong> sur tous nos produits reconditionnés</li>
+                <li><i>✓</i> <strong>Livraison rapide</strong> à Dakar (24-48h) et partout au Sénégal via nos partenaires</li>
+                <li><i>✓</i> <strong>Support client réactif</strong> 7j/7 par WhatsApp</li>
+                <li><i>✓</i> <strong>Prix transparents</strong> possibilité de négociation pour certains produits </li>
+                <li><i>✓</i> <strong>Retours possibles</strong> sous 7 jours</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo"><img src="../logo/alkebulan%20tech.jpeg" alt="Logo" style="height:36px;" onerror="this.style.display='none'"><span class="nav-logo-text" style="font-size:18px;">ALKEBULAN <span>TECH</span></span></a>
+                <p class="footer-brand-desc">La plateforme de référence pour les produits tech premium en Afrique. Excellence, authenticité et service d'élite.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/alkebulan_tech/" class="social-btn" title="Instagram">ig</a>
+                    <a href="#" class="social-btn" title="Facebook">fb</a>
+                    <a href="#" class="social-btn" title="Twitter">tw</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Boutique</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#produits">Ordinateurs Portables</a></li>
+                    <li><a href="index.html#produits">Téléphones</a></li>
+                    <li><a href="index.html#produits">Drones</a></li>
+                    <li><a href="index.html#produits">Caméras</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <ul class="footer-links">
+                    <li><a href="a-propos.html">À propos</a></li>
+                    <li><a href="livraison.html">Livraison</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#retours">Retours</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/221785577229" target="_blank">+221 785 57 72 29</a></li>
+                    <li><a href="https://wa.me/221773624539" target="_blank">+221 773 62 45 39</a></li>
+                    <li><a href="https://wa.me/221772641108" target="_blank">+221 772 64 11 08</a></li>
+                    <li>Dakar, Sénégal</li>
+                    <li>Lun – Sam · 8h–19h</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 <span>ALKEBULAN TECH</span> · Tous droits réservés</div>
+            <div class="footer-pay">
+                <span class="pay-badge">WAVE</span>
+                <span class="pay-badge">OM</span>
+                <span class="pay-badge">VISA</span>
+                <span class="pay-badge">MASTERCARD</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Curseur personnalisé
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            }, 80);
+        });
+
+        document.querySelectorAll('a, button, .value-card, .team-card, .story-visual').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+                cursorRing.style.opacity = '0';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+                cursorRing.style.opacity = '1';
+            });
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Révélation au scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Panier basique
+        let cartCount = 0;
+        document.querySelector('.nav-cart').addEventListener('click', function() {
+            cartCount++;
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            // Petit feedback
+            const cart = this;
+            cart.style.color = 'var(--gold)';
+            setTimeout(() => cart.style.color = '', 300);
+        });
+
+        // Animation des nombres (optionnelle)
+        function animateNumbers() {
+            const numberElements = document.querySelectorAll('.number-num');
+            numberElements.forEach(el => {
+                const value = el.innerText;
+                if (value.includes('+')) return; // Skip if already formatted
+                // Simple animation placeholder
+            });
+        }
+
+        // Call after reveal
+        setTimeout(animateNumbers, 1000);
+    </script>
+</body>
+</html>

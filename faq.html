@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ · ALKEBULAN TECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo/alkebulan tech.jpeg" type="image/jpeg">
+    <style>
+        /* ===== REPRISE INTÉGRALE DU STYLE PRINCIPAL ===== */
+        :root {
+            --primary: #00BFFF;
+            --primary-light: #5DD9FF;
+            --primary-dark: #0099CC;
+            --accent: #E91E8C;
+            --bg-dark: #0D0A1A;
+            --black: #08060E;
+            --dark: #12101E;
+            --dark-2: #1A1528;
+            --dark-3: #242038;
+            --white: #F5F3FF;
+            --grey: #8A8AA3;
+            --grey-light: #C8C8E0;
+            --gold: var(--primary);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; cursor: none; }
+        .cursor { position: fixed; width: 12px; height: 12px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s; }
+        .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.15s ease, opacity 0.3s; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 60px; background: linear-gradient(180deg, rgba(13,10,26,0.98) 0%, rgba(13,10,26,0) 100%); transition: all 0.4s; }
+        nav.scrolled { background: rgba(13,10,26,0.96); backdrop-filter: blur(20px); padding: 14px 60px; border-bottom: 1px solid rgba(0,191,255,0.25); }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 44px; width: auto; object-fit: contain; }
+        .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--white); letter-spacing: 3px; text-transform: uppercase; }
+        .nav-logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { color: var(--grey-light); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; gap: 24px; }
+        .nav-cart { position: relative; cursor: none; color: var(--white); transition: color 0.3s; }
+        .nav-cart:hover { color: var(--gold); }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--gold); color: var(--black); font-size: 9px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .btn-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn-nav:hover { background: var(--gold); color: var(--black); }
+
+        /* ===== STYLES SPÉCIFIQUES FAQ ===== */
+        .page-header {
+            margin-top: 120px;
+            padding: 60px 60px 20px;
+            text-align: center;
+        }
+        .page-header .section-tag {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 700;
+            color: var(--white);
+        }
+        .page-header h1 .gold {
+            color: var(--gold);
+        }
+        .faq-section {
+            padding: 40px 60px 100px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: rgba(26, 21, 40, 0.6); /* var(--dark-2) avec transparence */
+            border: 1px solid rgba(0, 191, 255, 0.15);
+            margin-bottom: 20px;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .faq-item:hover {
+            border-color: rgba(0, 191, 255, 0.4);
+            background: var(--dark-2);
+        }
+        .faq-question {
+            padding: 24px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-question h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.5px;
+        }
+        .faq-icon {
+            color: var(--gold);
+            font-size: 28px;
+            font-weight: 300;
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            padding: 0 30px 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            border-top: 1px solid transparent;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 30px 24px 30px;
+            max-height: 300px; /* Ajusté pour le contenu */
+            border-top-color: rgba(0, 191, 255, 0.25);
+        }
+        .faq-answer p {
+            color: var(--grey-light);
+            font-size: 16px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        .faq-answer strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .faq-answer a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+        }
+        .faq-answer a:hover {
+            border-bottom-color: var(--gold);
+        }
+        .faq-highlight {
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+        .gold-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 60px; opacity: 0.3; }
+
+        footer { background: var(--dark-2); border-top: 1px solid rgba(0,191,255,0.2); padding: 80px 60px 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand .nav-logo { margin-bottom: 20px; }
+        .footer-brand-desc { font-size: 14px; color: var(--grey); line-height: 1.7; margin-bottom: 28px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .social-btn { width: 40px; height: 40px; border: 1px solid rgba(0,191,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--grey); text-decoration: none; transition: all 0.3s; cursor: none; }
+        .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: var(--grey); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--white); }
+        .footer-bottom { border-top: 1px solid rgba(0,191,255,0.15); padding-top: 32px; display: flex; align-items: center; justify-content: space-between; }
+        .footer-copy { font-size: 12px; color: var(--grey); letter-spacing: 1px; }
+        .footer-copy span { color: var(--gold); }
+        .footer-pay { display: flex; gap: 8px; align-items: center; }
+        .pay-badge { background: var(--dark-3); border: 1px solid rgba(0,191,255,0.2); padding: 4px 10px; font-size: 11px; color: var(--grey); letter-spacing: 1px; }
+
+        @media (max-width: 1100px) {
+            nav, nav.scrolled, .page-header, .faq-section { padding-left: 30px; padding-right: 30px; }
+            .gold-divider { margin: 0 30px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            footer { padding: 60px 30px 30px; }
+        }
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; }
+            .faq-question h3 { font-size: 18px; }
+        }
+        /* Animation reveal simple */
+        .reveal-faq { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal-faq.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="logo/alkebulan tech.jpeg" alt="ALKEBULAN TECH" onerror="this.style.display='none'">
+            <span class="nav-logo-text">ALKEBULAN <span>TECH</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#categories">Catégories</a></li>
+            <li><a href="index.html#produits">Produits</a></li>
+            <li><a href="index.html#galerie">Galerie</a></li>
+            <li><a href="index.html#avis">Avis</a></li>
+            <li><a href="index.html#commande">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-cart">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span class="cart-count">0</span>
+            </div>
+            <a href="index.html#commande" class="btn-nav">Commander</a>
+        </div>
+    </nav>
+
+    <!-- HEADER FAQ -->
+    <div class="page-header">
+        <div class="section-tag">Questions fréquentes</div>
+        <h1>FAQ <span class="gold">&</span> Aide</h1>
+    </div>
+
+    <div class="gold-divider"></div>
+
+    <!-- SECTION FAQ -->
+    <section class="faq-section">
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Comment passer une commande ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Vous pouvez commander directement depuis notre site :</p>
+                <p>→ via la <strong>Galerie Produits</strong> en cliquant sur "Commander" sous chaque article (vous serez redirigé vers WhatsApp).<br>
+                → via le <strong>formulaire de commande</strong> en bas de la page d'accueil, dans la section "Passez votre Commande".<br>
+                → en nous contactant directement sur l'un de nos numéros WhatsApp.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Quels sont les moyens de paiement acceptés ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Nous acceptons plusieurs moyens de paiement pour votre confort :</p>
+                <p><strong>Wave, Orange Money, Carte Visa, Mastercard.</strong> Le paiement s'effectue généralement à la livraison pour les commandes au Sénégal, ou en ligne selon l'accord avec notre équipe.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Proposez-vous une garantie sur les produits ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Oui, tous nos produits sont vérifiés et bénéficient d'une <strong>garantie minimale de 6 mois</strong> (hors dommages accidentels). Pour les produits neufs, la garantie constructeur s'applique. Contactez-nous pour plus de détails sur un article spécifique.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Puis-je retourner un article ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Vous disposez d'un délai de <strong>7 jours après réception</strong> pour nous retourner un article qui ne vous conviendrait pas (doit être dans son état d'origine, avec emballage). Les frais de retour sont à votre charge. Pour initier un retour, veuillez nous contacter par WhatsApp.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Vendez-vous des produits reconditionnés ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Absolument. Nous proposons à la fois des produits <strong>neufs et reconditionnés de haute qualité</strong>. Chaque produit reconditionné est testé, nettoyé et classé en fonction de son état (Bon état, Très bon état, Comme neuf). Les détails sont indiqués sur la fiche produit.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Comment connaître le prix exact de la livraison ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Le <strong>prix de livraison est fixé à 2000 FCFA</strong> si vous êtes dans le territoire de Dakar. Si vous êtes en dehors de Dakar, veuillez nous préciser votre localité exacte (ville ou quartier) afin que nous puissions vous communiquer le délai et le coût via nos partenaires (GP, bus, etc.). Aucune négociation n'est possible, nos prix sont déjà réduits au maximum.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Livrez-vous dans toute l'Afrique ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Actuellement, nous livrons principalement au <strong>Sénégal</strong>. Pour les autres pays d'Afrique, veuillez nous contacter directement afin d'étudier les possibilités d'expédition (les frais et délais varient selon la destination).</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Puis-je avoir une facture ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Oui, une facture vous est fournie systématiquement avec votre commande, que ce soit pour un particulier ou une entreprise.</p>
+            </div>
+        </div>
+
+        <div class="faq-item reveal-faq">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Comment suivre ma commande ?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Une fois votre commande expédiée, vous recevrez un message WhatsApp ou un appel avec les informations de suivi (numéro de bordereau, contact du transporteur) selon le mode de livraison choisi.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- FOOTER (identique à l'original, liens ajustés) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo"><img src="logo/alkebulan tech.jpeg" alt="Logo" style="height:36px;" onerror="this.style.display='none'"><span class="nav-logo-text" style="font-size:18px;">ALKEBULAN <span>TECH</span></span></a>
+                <p class="footer-brand-desc">La plateforme de référence pour les produits tech premium en Afrique. Excellence, authenticité et service d'élite.</p>
+                <div class="footer-socials"><a href="https://www.instagram.com/alkebulan_tech/" class="social-btn" title="Instagram">ig</a></div>
+            </div>
+            <div class="footer-col"><h4>Boutique</h4><ul class="footer-links"><li><a href="index.html#produits">Ordinateurs</a></li><li><a href="index.html#produits">Téléphones</a></li><li><a href="index.html#galerie">Galerie</a></li></ul></div>
+            <div class="footer-col"><h4>Informations</h4><ul class="footer-links"><li><a href="livraison.html">Livraison</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#retours">Retours</a></li></ul></div>
+            <div class="footer-col"><h4>Contact</h4><ul class="footer-links"><li><a href="https://wa.me/221785577229">+221 785 57 72 29</a></li><li><a href="https://wa.me/221773624539">+221 773 62 45 39</a></li><li>Dakar, Sénégal</li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 <span>ALKEBULAN TECH</span> · Tous droits réservés</div>
+            <div class="footer-pay"><span class="pay-badge">WAVE</span><span class="pay-badge">OM</span><span class="pay-badge">VISA</span></div>
+        </div>
+    </footer>
+
+    <script>
+        // Curseur personnalisé
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top  = e.clientY + 'px';
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top  = e.clientY + 'px';
+            }, 80);
+        });
+        document.querySelectorAll('a, button, .faq-item').forEach(el => {
+            el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; cursorRing.style.opacity = '0'; });
+            el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.opacity = '1'; });
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Toggle FAQ
+        function toggleFaq(element) {
+            const item = element.closest('.faq-item');
+            item.classList.toggle('active');
+        }
+
+        // Révélation au scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-faq').forEach(el => observer.observe(el));
+
+        // Panier (fonction minimale pour l'exemple)
+        let cartCount = 0;
+        document.querySelector('.nav-cart').addEventListener('click', function() {
+            cartCount++;
+            document.querySelector('.cart-count').textContent = cartCount;
+        });
+    </script>
+</body>
+</html>
