@@ -81,6 +81,25 @@
         .hero-orb-2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; border: 1px solid rgba(0,191,255,0.2); animation: rotate 12s linear infinite; }
         .hero-orb-3 { position: absolute; width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(233,30,140,0.15); animation: rotate 8s linear infinite reverse; }
         .hero-stats { position: absolute; bottom: 60px; left: 60px; display: flex; gap: 60px; animation: fadeUp 0.8s ease 0.5s both; }
+        .hero-meta-toggle { position: absolute; bottom: 40px; right: 60px; z-index: 3; }
+        .hero-meta-button { background: rgba(0,0,0,0.7); border: 1px solid rgba(0,191,255,0.5); color: var(--gold); padding: 10px 22px; font-family: 'Rajdhani', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: none; border-radius: 12px; display: inline-flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); transition: background 0.3s, transform 0.3s, border-color 0.3s; }
+        .hero-meta-button span { font-size: 14px; }
+        .hero-meta-button:hover { background: rgba(0,191,255,0.15); border-color: var(--gold); transform: translateY(-2px); }
+        .hero-meta-panel { position: absolute; left: 60px; right: 60px; bottom: 40px; background: radial-gradient(circle at top left, rgba(0,191,255,0.18), rgba(3,7,18,0.96)); border: 1px solid rgba(0,191,255,0.45); border-radius: 18px; padding: 18px 22px; display: none; align-items: center; justify-content: space-between; gap: 24px; z-index: 2; box-shadow: 0 18px 45px rgba(0,191,255,0.25); }
+        .hero-meta-panel.open { display: flex; }
+        .hero-meta-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+        .hero-meta-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+        .hero-meta-stats .stat { min-width: 90px; }
+        @media (max-width: 900px) {
+            .hero-meta-toggle { bottom: 24px; right: 20px; }
+            .hero-meta-panel { left: 20px; right: 20px; bottom: 20px; flex-direction: column; align-items: flex-start; }
+            .hero-meta-stats { gap: 20px; }
+        }
+        @media (max-width: 600px) {
+            .hero-meta-toggle { bottom: 18px; right: 20px; }
+            .hero-meta-button { padding: 8px 18px; font-size: 10px; }
+            .hero-meta-panel { padding: 14px 16px; }
+        }
         .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700; color: var(--gold); line-height: 1; }
         .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-top: 4px; }
         .section { padding: 120px 60px; }
@@ -104,11 +123,11 @@
         .cat-tag { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
         .cat-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 6px; }
         .cat-count { font-size: 12px; color: var(--grey); letter-spacing: 1px; }
-        .cat-laptop .cat-bg { background: linear-gradient(180deg, transparent 20%, rgba(13,27,42,0.9) 100%), url('ASSETS/laptop.jpg') center/cover no-repeat, url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=900') center/cover no-repeat #0D1B2A; }
-        .cat-phone .cat-bg { background: linear-gradient(180deg, transparent 20%, rgba(26,10,46,0.9) 100%), url('assetphone/phones.jpg') center/cover no-repeat, url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=900') center/cover no-repeat #1A0A2E; }
-        .cat-drone .cat-bg { background: linear-gradient(180deg, transparent 20%, rgba(13,33,55,0.9) 100%), url('ASSETS/drone.jpg') center/cover no-repeat, url('https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900') center/cover no-repeat #0D2137; }
-        .cat-camera .cat-bg { background: linear-gradient(180deg, transparent 20%, rgba(27,13,46,0.9) 100%), url('ASSETS/camera.jpg') center/cover no-repeat, url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=900') center/cover no-repeat #1B0D2E; }
-        .cat-security .cat-bg { background: linear-gradient(180deg, transparent 20%, rgba(13,31,45,0.9) 100%), url('ASSETS/security.jpg') center/cover no-repeat, url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=900') center/cover no-repeat #0D1F2D; }
+        .cat-laptop .cat-bg { background: linear-gradient(180deg, transparent 25%, rgba(13,27,42,0.92) 100%), url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=900&auto=format&fit=crop&q=80') center/cover no-repeat #0D1B2A; }
+        .cat-phone .cat-bg { background: linear-gradient(180deg, transparent 25%, rgba(26,10,46,0.92) 100%), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=900&auto=format&fit=crop&q=80') center/cover no-repeat #1A0A2E; }
+        .cat-drone .cat-bg { background: linear-gradient(180deg, transparent 25%, rgba(13,33,55,0.92) 100%), url('https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900&auto=format&fit=crop&q=80') center/cover no-repeat #0D2137; }
+        .cat-camera .cat-bg { background: linear-gradient(180deg, transparent 25%, rgba(27,13,46,0.92) 100%), url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=900&auto=format&fit=crop&q=80') center/cover no-repeat #1B0D2E; }
+        .cat-security .cat-bg { background: linear-gradient(180deg, transparent 25%, rgba(13,31,45,0.92) 100%), url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=900&auto=format&fit=crop&q=80') center/cover no-repeat #0D1F2D; }
         .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
         .product-card { background: var(--dark-2); position: relative; overflow: hidden; cursor: none; transition: transform 0.4s ease; }
         .product-card:hover { transform: translateY(-6px); }
@@ -184,7 +203,7 @@
         .gallery-slide.active { display: block; }
         .gallery-page { display: none; }
         .gallery-page.active { display: block; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
         .gallery-item { background: var(--dark-2); overflow: hidden; border: 1px solid rgba(0,191,255,0.12); transition: border-color 0.3s, transform 0.3s; }
         .gallery-item:hover { border-color: rgba(0,191,255,0.45); transform: translateY(-4px); }
         .gallery-item-img { aspect-ratio: 1; overflow: hidden; background: var(--dark-3); }
@@ -216,12 +235,18 @@
         .admin-logout-link { display: none !important; }
         .admin-link { font-size: 10px; opacity: 0.5; color: var(--grey); text-decoration: none; letter-spacing: 1px; }
         .admin-link:hover { color: var(--primary); }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
-        .modal-overlay.open { display: flex; }
-        .modal { background: var(--dark-2); border: 1px solid rgba(0,191,255,0.3); max-width: 420px; width: 100%; padding: 32px; position: relative; }
-        .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 24px; color: var(--white); }
-        .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--grey); font-size: 24px; cursor: none; }
-        .modal-close:hover { color: var(--white); }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 20px; }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal { background: var(--dark-2); border: 1px solid rgba(0,191,255,0.3); border-radius: 16px; max-width: 650px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; transform: scale(0.9) translateY(20px); transition: all 0.3s ease; box-shadow: 0 20px 60px rgba(0,191,255,0.2); }
+        .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 24px 16px; border-bottom: 1px solid rgba(0,191,255,0.2); position: sticky; top: 0; background: var(--dark-2); border-radius: 16px 16px 0 0; z-index: 10; }
+        .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--gold); }
+        .modal-close { width: 40px; height: 40px; background: rgba(0,191,255,0.1); border: 1px solid rgba(0,191,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary); cursor: none; transition: all 0.3s; }
+        .modal-close:hover { background: var(--primary); color: var(--black); transform: scale(1.1); }
+        .modal-body { padding: 20px 24px; overflow-y: auto; flex: 1; max-height: calc(85vh - 140px); }
+        .modal-footer { padding: 16px 24px 24px; border-top: 1px solid rgba(0,191,255,0.2); display: flex; justify-content: center; }
+        .modal-btn { background: var(--gold); color: var(--black); border: none; padding: 12px 32px; font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-radius: 8px; cursor: none; transition: all 0.3s; }
+        .modal-btn:hover { background: var(--primary); transform: translateY(-2px); }
         .modal-input { width: 100%; padding: 12px 16px; margin-bottom: 16px; background: var(--dark-3); border: 1px solid rgba(0,191,255,0.3); color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 14px; }
         .modal-input:focus { outline: none; border-color: var(--primary); }
         .modal-btn { width: 100%; padding: 14px; background: var(--primary); color: var(--black); border: none; font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: none; }
@@ -344,7 +369,7 @@
     <div class="cursor-ring" id="cursorRing"></div>
 
     <nav id="navbar">
-        <a href="#" class="nav-logo">
+        <a href="index.html" class="nav-logo">
             <img src="logo/alkebulan tech.jpeg" alt="ALKEBULAN TECH" onerror="this.style.display='none'">
             <span class="nav-logo-text">ALKEBULAN <span>TECH</span></span>
         </a>
@@ -383,10 +408,6 @@
                 <span class="line">Portée</span>
             </h1>
             <p class="hero-desc">Découvrez une sélection premium de technologies — ordinateurs, smartphones, drones et caméras — soigneusement curatée pour les esprits exigeants.</p>
-            <div class="hero-actions">
-                <a href="#produits" class="btn-primary"><span>Explorer la boutique</span></a>
-                <a href="#categories" class="btn-secondary"><span class="arrow">→</span>Voir les catégories</a>
-            </div>
         </div>
         <div class="hero-visual">
             <div class="hero-visual-inner">
@@ -395,10 +416,21 @@
                 <div class="hero-orb-3"></div>
             </div>
         </div>
-        <div class="hero-stats">
-            <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Produits Premium</div></div>
-            <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Marques Partenaires</div></div>
-            <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Clients Satisfaits</div></div>
+        <div class="hero-meta-toggle">
+            <button type="button" class="hero-meta-button" onclick="toggleHeroMeta()">
+                <span>✦</span> Détails de la boutique
+            </button>
+        </div>
+        <div class="hero-meta-panel" id="heroMetaPanel">
+            <div class="hero-meta-actions">
+                <a href="#produits" class="btn-primary"><span>Explorer la boutique</span></a>
+                <a href="#categories" class="btn-secondary"><span class="arrow">→</span>Voir les catégories</a>
+            </div>
+            <div class="hero-meta-stats">
+                <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Produits Premium</div></div>
+                <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Marques Partenaires</div></div>
+                <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Clients Satisfaits</div></div>
+            </div>
         </div>
     </section>
 
@@ -407,14 +439,14 @@
     <section class="section" id="categories">
         <div class="section-header reveal">
             <div><div class="section-tag">Collections</div><h2 class="section-title">Nos <span class="gold">Catégories</span></h2></div>
-            <a href="#" class="see-all">Voir tout →</a>
+            <a href="#galerie" class="see-all">Voir tout →</a>
         </div>
         <div class="categories-grid reveal">
             <div class="cat-card cat-laptop"><div class="cat-bg"></div><div class="cat-icon">💻</div><div class="cat-card-inner"><div class="cat-tag">Collection</div><div class="cat-name">Ordinateurs Portables</div><div class="cat-count">30 Produits disponibles</div></div></div>
             <div class="cat-card cat-phone"><div class="cat-bg"></div><div class="cat-icon">📱</div><div class="cat-card-inner"><div class="cat-tag">Smartphones</div><div class="cat-name">Téléphones</div><div class="cat-count">10 Produits</div></div></div>
-            <div class="cat-card cat-drone"><div class="cat-bg"></div><div class="cat-icon">🚁</div><div class="cat-card-inner"><div class="cat-tag">Aérien</div><div class="cat-name">Drones</div><div class="cat-count">10 Produits</div></div></div>
-            <div class="cat-card cat-camera"><div class="cat-bg"></div><div class="cat-icon">🎥</div><div class="cat-card-inner"><div class="cat-tag">Cinéma</div><div class="cat-name">Caméras</div><div class="cat-count">20 Produits</div></div></div>
-            <div class="cat-card cat-security"><div class="cat-bg"></div><div class="cat-icon">📷</div><div class="cat-card-inner"><div class="cat-tag">Sécurité</div><div class="cat-name">Surveillance</div><div class="cat-count">30 Produits</div></div></div>
+            <div class="cat-card cat-drone"><div class="cat-bg"></div><div class="cat-icon">🚁</div><div class="cat-card-inner"><div class="cat-tag">Aérien</div><div class="cat-name">Drones</div><div class="cat-count">pas encores disponibles</div></div></div>
+            <div class="cat-card cat-camera"><div class="cat-bg"></div><div class="cat-icon">🎥</div><div class="cat-card-inner"><div class="cat-tag">Cinéma</div><div class="cat-name">Caméras</div><div class="cat-count">pas encores disponibles</div></div></div>
+            <div class="cat-card cat-security"><div class="cat-bg"></div><div class="cat-icon">📷</div><div class="cat-card-inner"><div class="cat-tag">Sécurité</div><div class="cat-name">Surveillance</div><div class="cat-count">pas encores disponibles</div></div></div>
         </div>
     </section>
 
@@ -435,7 +467,7 @@
             <div class="product-card reveal"><div class="product-img"><img src="assetphone/IPHONE15PRO.jfif" alt="iPhone 15 Pro"><div class="product-img-bg"></div><div class="product-wishlist">♡</div></div><div class="product-info"><div class="product-brand">Apple</div><div class="product-name">iPhone 15 Pro</div><div class="product-specs">256GB · Neuf</div><div class="product-footer"><div><span class="product-price">1 199 000 XOF</span></div><button class="btn-add" onclick="addToCart(this)">+</button></div></div></div>
             <div class="product-card reveal"><div class="product-img"><img src="assetphone/fold3SAMSNG.jfif" alt="Galaxy Z Fold3"><div class="product-img-bg"></div><div class="product-wishlist">♡</div></div><div class="product-info"><div class="product-brand">Samsung</div><div class="product-name">Galaxy Z Fold3</div><div class="product-specs">256GB · Écran pliable</div><div class="product-footer"><div><span class="product-price">720 000 XOF</span></div><button class="btn-add" onclick="addToCart(this)">+</button></div></div></div>
             <div class="product-card reveal"><div class="product-img"><img src="assetphone/S21SAM.jfif" alt="Galaxy S21"><div class="product-img-bg"></div><div class="product-wishlist">♡</div></div><div class="product-info"><div class="product-brand">Samsung</div><div class="product-name">Galaxy S21</div><div class="product-specs">128GB · Très bon état</div><div class="product-footer"><div><span class="product-price">159 000 XOF</span></div><button class="btn-add" onclick="addToCart(this)">+</button></div></div></div>
-            <div class="product-card reveal"><div class="product-img"><img src="assetphone/13PRO.jfif" alt="iPhone 13 Pro"><div class="product-img-bg"></div><div class="product-wishlist">♡</div></div><div class="product-info"><div class="product-brand">Apple</div><div class="product-name">iPhone 13 Pro</div><div class="product-specs">128GB · Bon état</div><div class="product-footer"><div><span class="product-price">299 000 XOF</span></div><button class="btn-add" onclick="addToCart(this)">+</button></div></div></div>
+    
         </div>
     </section>
 
@@ -475,15 +507,15 @@
             <!-- Page 1 : HP & Dell -->
             <div class="gallery-page active" id="ordi-p1">
                 <div class="gallery-grid">
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/745G6111.jfif" alt="HP EliteBook 745 G6" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP EliteBook 745 G6">EliteBook 745 G6</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP EliteBook 745 G6', 'ordi')">Voir les caractéristiques</button></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/745G62222.jfif" alt="HP EliteBook 745 G6 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP EliteBook 745 G6 #2">EliteBook 745 G6 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP EliteBook 745 G6 #2', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/elitebooK745G6.jfif" alt="HP EliteBook 745 G6" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP EliteBook 745 G6">EliteBook 745 G6</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP EliteBook 745 G6', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/elitebooK745G6.jfif" alt="HP EliteBook 745 G6 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP EliteBook 745 G6 #2">EliteBook 745 G6 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP EliteBook 745 G6 #2', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/7480DELL.jfif" alt="Dell Latitude 7480" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7480">Latitude 7480</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Dell Latitude 7480', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/7480DELL111.jfif" alt="Dell Latitude 7480 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7480 #2">Latitude 7480 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Dell Latitude 7480 #2', 'ordi')">Voir les caractéristiques</button></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/840G31111.jfif" alt="HP ProBook 840 G3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP ProBook 840 G3">ProBook 840 G3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP ProBook 840 G3', 'ordi')">Voir les caractéristiques</button></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/840G3222222.jfif" alt="HP ProBook 840 G3 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP ProBook 840 G3 #2">ProBook 840 G3 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP ProBook 840 G3 #2', 'ordi')">Voir les caractéristiques</button></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/DELL7400.jfif" alt="Dell Latitude 7400" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7400">Latitude 7400</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/DELL74001111.jfif" alt="Dell Latitude 7400 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7400 #2">Latitude 7400 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/DELL74002222.jfif" alt="Dell Latitude 7400 #3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7400 #3">Latitude 7400 #3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/PROBOOK840G3.jfif" alt="HP ProBook 840 G3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP ProBook 840 G3">ProBook 840 G3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP ProBook 840 G3', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/PROBOOK840G3.jfif" alt="HP ProBook 840 G3 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP ProBook 840 G3 #2">ProBook 840 G3 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('HP ProBook 840 G3 #2', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/DELL7400.jfif" alt="Dell Latitude 7400" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7400">Latitude 7400</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Dell Latitude 7400', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/DELL74002222.jfif" alt="Dell Latitude 7400 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7400 #2">Latitude 7400 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Dell Latitude 7400 #2', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/DELL74001111.jfif" alt="Dell Latitude 7400 #3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Dell</div><div class="gallery-item-name" data-name="Dell Latitude 7400 #3">Latitude 7400 #3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Dell Latitude 7400 #3', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/elitebooK745G6.jfif" alt="HP EliteBook 745 G6 #3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">HP</div><div class="gallery-item-name" data-name="HP EliteBook 745 G6 #3">EliteBook 745 G6 #3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
                 </div>
             </div>
@@ -496,7 +528,7 @@
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC201522222.jfif" alt="Apple iMac 2015 #3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2015 #3">iMac 2015 #3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2015 #3', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC20153333.jfif" alt="Apple iMac 2015 #4" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2015 #4">iMac 2015 #4</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2015 #4', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC2016.jfif" alt="Apple iMac 2016" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2016">iMac 2016</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC20161111.jfif" alt="Apple iMac 2016 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2016 #2">iMac 2016 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2016 #2', 'ordi')">Voir les caractéristiques</button></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC2016.jfif" alt="Apple iMac 2016 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2016 #2">iMac 2016 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2016 #2', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC2017.jfif" alt="Apple iMac 2017" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2017">iMac 2017</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2017', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC20171111.jfif" alt="Apple iMac 2017 #2" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2017 #2">iMac 2017 #2</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2017 #2', 'ordi')">Voir les caractéristiques</button></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="ASSETTES/IMAC20172222.jfif" alt="Apple iMac 2017 #3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iMac 2017 #3">iMac 2017 #3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div><button type="button" class="gallery-specs-btn" onclick="showSpecs('Apple iMac 2017 #3', 'ordi')">Voir les caractéristiques</button></div>
@@ -539,13 +571,13 @@
                 <div class="gallery-grid">
                     <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/11PRO.jfif" alt="Apple iPhone 11 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 11 Pro">iPhone 11 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/12PRO.jfif" alt="Apple iPhone 12 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 12 Pro">iPhone 12 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/12SIMPLE.jfif" alt="Apple iPhone 12" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 12">iPhone 12</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/13PRO.jfif" alt="Apple iPhone 13 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 13 Pro">iPhone 13 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/14PRO.jfif" alt="Apple iPhone 14 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 14 Pro">iPhone 14 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/15PR2222.png" alt="Apple iPhone 15 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 15 Pro">iPhone 15 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/IPHONE15PRO.jfif" alt="Apple iPhone 15 Pro Max" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 15 Pro Max">iPhone 15 Pro Max</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="https://images.unsplash.com/photo-1607933591691-7d027ad87215?w=800&h=800&fit=crop&crop=center" alt="Apple iPhone 12" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 12">iPhone 12</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="https://images.unsplash.com/photo-1607933591691-7d027ad87215?w=800&h=800&fit=crop&crop=center" alt="Apple iPhone 13 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 13 Pro">iPhone 13 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="https://images.unsplash.com/photo-1607933591691-7d027ad87215?w=800&h=800&fit=crop&crop=center" alt="Apple iPhone 14 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 14 Pro">iPhone 14 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/IPHONE15PRO.jfif" alt="Apple iPhone 15 Pro" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 15 Pro">iPhone 15 Pro</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="https://images.unsplash.com/photo-1607933591691-7d027ad87215?w=800&h=800&fit=crop&crop=center" alt="Apple iPhone 15 Pro Max" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Apple</div><div class="gallery-item-name" data-name="Apple iPhone 15 Pro Max">iPhone 15 Pro Max</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/fold3SAMSNG.jfif" alt="Samsung Galaxy Z Fold3" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Samsung</div><div class="gallery-item-name" data-name="Samsung Galaxy Z Fold3">Galaxy Z Fold3</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
-                    <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/SAMS23.jfif" alt="Samsung Galaxy S23" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Samsung</div><div class="gallery-item-name" data-name="Samsung Galaxy S23">Galaxy S23</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
+                    <div class="gallery-item"><div class="gallery-item-img"><img src="https://images.unsplash.com/photo-1592748233712-5c8f8b8b6a7?w=800&h=800&fit=crop&crop=center" alt="Samsung Galaxy S23" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Samsung</div><div class="gallery-item-name" data-name="Samsung Galaxy S23">Galaxy S23</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
                     <div class="gallery-item"><div class="gallery-item-img"><img src="assetphone/S21SAM.jfif" alt="Samsung Galaxy S21" loading="lazy"></div><div class="gallery-item-body"><div class="gallery-item-cat">Samsung</div><div class="gallery-item-name" data-name="Samsung Galaxy S21">Galaxy S21</div><div class="gallery-order-row"><input type="number" class="gallery-qty" min="1" value="1"><button type="button" class="gallery-order-btn" onclick="commanderGalerie(this)">Commander</button></div></div></div>
                 </div>
             </div>
@@ -645,13 +677,17 @@
 
     <!-- Modal Caractéristiques Produit -->
     <div class="modal-overlay" id="specsModal">
-        <div class="modal" style="max-width: 600px;">
-            <button type="button" class="modal-close" onclick="closeSpecsModal()">&times;</button>
-            <h3 id="specsTitle">Caractéristiques du Produit</h3>
-            <div id="specsContent" style="margin-bottom: 24px;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="specsTitle">Caractéristiques du Produit</h3>
+                <button type="button" class="modal-close" onclick="closeSpecsModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="specsContent">
                 <!-- Contenu dynamique -->
             </div>
-            <button type="button" class="modal-btn" onclick="closeSpecsModal()">Fermer</button>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn" onclick="closeSpecsModal()">Fermer</button>
+            </div>
         </div>
     </div>
 
@@ -861,6 +897,12 @@
 
         function closeSpecsModal() {
             document.getElementById('specsModal').classList.remove('open');
+        }
+
+        function toggleHeroMeta() {
+            const panel = document.getElementById('heroMetaPanel');
+            if (!panel) return;
+            panel.classList.toggle('open');
         }
 
         function getSpecs(productName, category) {
